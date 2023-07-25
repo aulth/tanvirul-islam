@@ -14,11 +14,9 @@ export default function Home() {
         <Navbar />
         <LandingPage />
         <History />
-        <Alumni />
-        <Faculty/>
         <Courses/>
-      </div>
       <Footer/>
+      </div>
     </>
   )
 }

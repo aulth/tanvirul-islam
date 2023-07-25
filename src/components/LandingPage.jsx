@@ -2,7 +2,7 @@ import React, {useState, useEffect} from 'react'
 import { BiMap } from 'react-icons/bi'
 import Image from 'next/image'
 const LandingPage = () => {
-    const [images, setImages] = useState(['https://source.unsplash.com/random/?school', 'https://source.unsplash.com/random/?islamic', 'https://source.unsplash.com/random/?masjid', 'https://source.unsplash.com/random/?masjid', 'https://source.unsplash.com/random/?masjid'])
+    const [images, setImages] = useState(['https://source.unsplash.com/random/?school', 'https://source.unsplash.com/random/?islamic', 'https://source.unsplash.com/random/?masjid', 'https://source.unsplash.com/random/?class', 'https://source.unsplash.com/random/?hostel'])
     const [activeIndex, setActiveIndex] = useState(0)
     useEffect(() => {
         if (typeof window !== 'undefined') {
@@ -28,7 +28,7 @@ const LandingPage = () => {
                         {
                             images.map((image, index)=>{
                                 return <button onClick={()=>{setActiveIndex(index)}} key={index} className="rounded-full aspect-square w-16 shrink shadow-md border relative overflow-hidden">
-                                <Image src="https://source.unsplash.com/random/?masjid" alt='masjid' layout='fill' objectFit='cover' className='rounded-full hover:scale-105 duration-75' />
+                                <Image src={images[index]} alt='masjid' layout='fill' objectFit='cover' className='rounded-full hover:scale-105 duration-75' />
                             </button>
                             })
                         }
