@@ -8,6 +8,9 @@ overflow-x:hidden;}
 color:#46a999}
 .text-secondary{
 color:#44b29d}
+html {
+  scroll-behavior: smooth;
+}
 .line {
   position: absolute;
   bottom: 0;

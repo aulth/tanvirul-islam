@@ -6,9 +6,9 @@ const Courses = () => {
     return (
         <>
 
-            <div className="container mx-auto p-8 ">
+            <div className="container mx-auto p-8 scroll-smooth" id='courses'>
                 <h2 className="text-left text-2xl font-bold flex gap-2  items-center"><BsBookHalf className='mt-1' /> Explore Courses</h2>
-                <p className="text-sm text-left font-semibold text-gray-500">
+                <p className="text-sm text-left font-semibold text-gray-500 mt-1">
                     Discover our wide selection of courses. Explore various subjects, learn from great scholars, and find opportunities for your future.
                 </p>
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-4">
