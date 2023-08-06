@@ -1,9 +1,8 @@
 import '@/styles/globals.css'
-import { SessionProvider } from "next-auth/react";
 export default function App({ Component, pageProps }) {
   return (
-    <SessionProvider session={pageProps.session}>
-     <Component {...pageProps} />
-    </SessionProvider>
+    <div className='bg-gradient-to-br from-[#FEFDFC] to-[#F8F7EE]'>
+       <Component {...pageProps} />
+      </div>
    );
 }

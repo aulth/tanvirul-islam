@@ -1,6 +1,6 @@
 import Footer from "@/components/Footer";
-import Navbar from "@/components/Gallery/Navbar";
 import Row from "@/components/Gallery/Row";
+import Navbar from "@/components/Navbar";
 const page = () => {
   const month = [ 'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec' ];
   let images = [
@@ -74,17 +74,15 @@ const groupPhotosByMonth = (photos) => {
     return b.month - a.month;
   });
 
-  return photosGroupedByMonth;
+  const allImages = photosGroupedByMonth.reduce((images, group) => {
+    return images.concat(group.photos);
+  }, []);
+  return { photosGroupedByMonth, allImages };
 };
 
-const photosGroupedByMonth = groupPhotosByMonth(images);
+const {photosGroupedByMonth, allImages} = groupPhotosByMonth(images);
   return (
     <>
-      <style jsx>
-        {`
-          
-          `}
-      </style>
       <div className=" border-b border-gray-300">
         <Navbar />
       </div>
@@ -101,7 +99,7 @@ const photosGroupedByMonth = groupPhotosByMonth(images);
       <div className="container mx-auto p-5 pt-4 grid grid-cols-1 gap-2">
         {
           photosGroupedByMonth && photosGroupedByMonth.length>0 && photosGroupedByMonth.map((data, index)=>{
-            return <Row key={index} time={`${month[data.month-1]} ${data.year}`} images={data.photos}/>
+            return <Row key={index} time={`${month[data.month-1]} ${data.year}`} images={data.photos} allImages={allImages}/>
           })
         }
       </div>

@@ -10,13 +10,11 @@ import Footer from '@/components/Footer'
 export default function Home() {
   return (
     <>
-      <div className='bg-gradient-to-br from-[#FEFDFC] to-[#F8F7EE]'>
-        <Navbar />
-        <LandingPage />
-        <History />
-        <Courses/>
-      <Footer/>
-      </div>
+      <Navbar />
+      <LandingPage />
+      <History />
+      <Courses />
+      <Footer />
     </>
   )
 }
