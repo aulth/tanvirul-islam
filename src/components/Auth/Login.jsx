@@ -18,7 +18,7 @@ const Login = () => {
     }
     return (
         <div className="container mx-auto p-8">
-            <div className="w-full md:w-[468px] mx-auto md:border md:p-4 md:rounded md:shadow">
+        <div className="container md:h-[calc(100vh-64px)] md:flex md:justify-center md:items-center mx-auto p-8">
                 <h2 className="font-bold text-2xl">Login</h2>
                 <p className="font-semibold text-sm text-gray-500 mt-1">Sign in to access your account and start using our app.</p>
                 <form className="flex flex-col gap-3 mt-4">
@@ -35,7 +35,10 @@ const Login = () => {
                         <button type="submit" className="h-10 pl-2 w-full font-semibold bg-[#46a999] text-white rounded">Sign up</button>
                     </div>
                     <p className="text-center text-sm text-gray-500">Not Registered yet?</p>
-                    <Link href="/auth/register" className="text-center w-full font-semibold text-sm border-[#46a999] text-[#46a999]">Create an account</Link>
+                    <div className="flex gap-2 justify-center items-center px-2 ">
+                        <Link href="/auth/login" className="font-semibold text-sm border-[#46a999] text-[#46a999]">Login</Link>
+                        <Link href="/auth/forgot-password" className="text-sm border-[#46a999] text-gray-500">Forgot Password?</Link>
+                    </div>
                 </form>
             </div>
         </div>

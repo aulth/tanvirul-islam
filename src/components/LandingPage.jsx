@@ -16,7 +16,7 @@ const LandingPage = () => {
     
     return (
         <>
-            <div className="container mx-auto grid grid-cols-1 md:grid-cols-2 border-b">
+            <div className="container  mx-auto grid grid-cols-1 md:grid-cols-2 border-b">
                 <div className='p-8' id='section-1'>
                     <button className="px-2 py-1 bg-[#E6F2EF] flex gap-1 items-center text-sm font-semibold rounded"><BiMap className='text-[#3DB1A7]' />Amardobha, Post Bakhira, S.K.N.</button>
                     <h2 className="font-bold text-2xl md:text-4xl mt-6">A reliable Islamic Center to Follow the Qur&apos;an & Sunnah</h2>
@@ -34,7 +34,7 @@ const LandingPage = () => {
                         }
                     </div>
                 </div>
-                <div id='section-2' className="p-8  flex justify-center items-center  relative">
+                <div id='section-2' className="p-8  h-full flex justify-center items-center  relative">
                     <Image src={images[activeIndex]} alt='carousel images' layout='fill' objectFit='cover' className='bg-blend-screen' />
                 </div>
             </div>

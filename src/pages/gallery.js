@@ -86,7 +86,7 @@ const {photosGroupedByMonth, allImages} = groupPhotosByMonth(images);
       <div className=" border-b border-gray-300">
         <Navbar />
       </div>
-      <div className="w-screen bg-gradient-to-br from-[#FEFDFC] to-[#F8F7EE]">
+      <div className="w-screen bg-green-100">
         <div className="container mx-auto p-8">
           <h2 className="text-center text-2xl md:text-4xl font-bold ">
             Gallery

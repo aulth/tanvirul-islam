@@ -66,6 +66,21 @@ const Row = ({ time, images, allImages }) => {
           };
     }, [viewerIsOpen]);
 
+    useEffect(() => {
+      if(typeof window!=undefined){
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'ArrowLeft' || event.key === 'ArrowDown') {
+              prevImage();
+            } else if (event.key === 'ArrowRight' || event.key === 'ArrowUp') {
+                nextImage();
+            }
+            else if (event.key === 'Backspace') {
+                closeLightBox();
+            }
+          });
+      }
+    }, [])
+    
     return (
         <div className="w-full">
             <h4 className="font-semibold text-sm">{time}</h4>

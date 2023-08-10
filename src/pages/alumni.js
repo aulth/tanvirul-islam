@@ -1,5 +1,5 @@
 import AlumniCard from "@/components/Alumni/AlumniCard"
-import Navbar from "@/components/Alumni/Navbar"
+import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { BiSearch } from "react-icons/bi"
 
