@@ -1,4 +1,3 @@
-import Image from 'next/image';
 import React, { useState } from 'react'
 import { BiSolidUser, BiUser, BiUserX } from "react-icons/bi";
 import { BsEye, BsEyeSlash } from "react-icons/bs";

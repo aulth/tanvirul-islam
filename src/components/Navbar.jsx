@@ -55,9 +55,9 @@ const Navbar = () => {
                         </ul>
                         {
                             login &&
-                            <button className="flex justify-center items-center md:mx-2 mr-0.5 relative overflow-hidden">
+                            <Link href="/account" className="flex justify-center items-center md:mx-2 mr-0.5 relative overflow-hidden">
                                 <Image src="https://img.icons8.com/color/48/circled-user-male-skin-type-1-2--v1.png" width={25} height={25} className='md:w-[40px] aspect-square w-[28px] rounded-full object-cover' alt='avatar' />
-                            </button>
+                            </Link>
                         }
                         <div className="flex justify-center items-center md:hidden">
                             <button onClick={() => { setOpenedMenu(status => !status) }} className='text-black font-semibold  block focus:shadow-sm p-1 rounded'>
