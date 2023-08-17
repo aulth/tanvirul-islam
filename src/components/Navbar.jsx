@@ -6,7 +6,7 @@ import { BiSolidUser } from 'react-icons/bi'
 import Link from 'next/link'
 import { ContextData } from '@/context/context'
 const Navbar = () => {
-    const { login } = useContext(ContextData);
+    const { login, userData } = useContext(ContextData);
     const [openedMenu, setOpenedMenu] = useState(false);
     return (
         <>
@@ -56,7 +56,7 @@ const Navbar = () => {
                         {
                             login &&
                             <Link href="/account" className="flex justify-center items-center md:mx-2 mr-0.5 relative overflow-hidden">
-                                <Image src="https://img.icons8.com/color/48/circled-user-male-skin-type-1-2--v1.png" width={25} height={25} className='md:w-[40px] aspect-square w-[28px] rounded-full object-cover' alt='avatar' />
+                                <Image src={userData?.avatar} width={25} height={25} className='md:w-[40px] aspect-square w-[28px] rounded-full object-cover' alt='avatar' />
                             </Link>
                         }
                         <div className="flex justify-center items-center md:hidden">

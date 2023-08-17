@@ -6,7 +6,7 @@ import { ContextData } from "@/context/context";
 import Link from "next/link";
 import { useRouter } from "next/router";
 const Sidebar = () => {
-  const {toggleProfileMenu} = useContext(ContextData);
+  const {toggleProfileMenu, setLogin, setUserData} = useContext(ContextData);
   const router = useRouter();
       useEffect(() => {
         const profileMenu = document.querySelector('.prof-menu');
@@ -37,6 +37,13 @@ const Sidebar = () => {
           profileMenu.removeEventListener('touchend', handleTouchEnd);
         };
       }, []);
+      const handleLogout = ()=>{
+        if(typeof window!=undefined){
+          localStorage.removeItem('duati-id');
+          setLogin(false);
+          setUserData("");
+        }
+      }
   return (
    <>
    <div className="md:col-span-1 prof-menu fixed top-0 -left-full duration-75 ease-in md:bg-transparent bg-white rounded-tr md:border-none border-r z-20 w-3/4 h-screen md:p-0 p-4 md:block md:static ">
@@ -49,7 +56,7 @@ const Sidebar = () => {
               <Link href="/account" className={`hover:bg-gray-100 ${router.pathname=="/account"?'bg-gray-100':''} rounded px-2 py-1 w-full text-left`}>Profile</Link>
               <Link href="/account/password" className={`hover:bg-gray-100 ${router.pathname.includes("password")?'bg-gray-100':''} rounded px-2 py-1 w-full text-left`}>Password</Link>
               <Link href="/account/gallery"  className={`hover:bg-gray-100 ${router.pathname.includes("gallery")?'bg-gray-100':''} rounded px-2 py-1 w-full text-left`}>Gallery</Link>
-
+              <button onClick={handleLogout}  className={`hover:bg-gray-100  rounded px-2 py-1 w-full text-left`}>Logout</button>
             </ul>
           </div>
    </>
