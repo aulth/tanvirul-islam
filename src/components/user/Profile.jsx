@@ -9,11 +9,14 @@ import { BsInstagram, BsTwitter, BsWhatsapp } from "react-icons/bs";
 import { AiOutlineTwitter } from "react-icons/ai";
 import { useRouter } from "next/router";
 import users from "@/data/users";
+import toast, { Toaster } from 'react-hot-toast';
+import Spinner from "../Spinner";
 const Profile = () => {
-  const { toggleProfileMenu, login } = useContext(ContextData);
-  const [data, setData] = useState();
+  const { toggleProfileMenu, login, userData, fetchUser } = useContext(ContextData);
+  const [data, setData] = useState(userData);
   const [dataCopy, setDataCopy] = useState(data);
   const [changeDetected, setChangeDetected] = useState(false);
+  const [processing, setProcessing] = useState(false)
   const router = useRouter();
   const handleOnChange = (e) => {
     if (!changeDetected) {
@@ -28,6 +31,80 @@ const Profile = () => {
     setData(dataCopy);
     setChangeDetected(false)
   }
+  const handleUpdate = async (e) => {
+    e.preventDefault();
+    setProcessing(true)
+    if (typeof window != undefined) {
+      let authtoken = localStorage.getItem('authtoken');
+      const response = await fetch('/api/updateuser', {
+        method: 'POST',
+        headers: {
+          'content-type': 'application/json'
+        },
+        body: JSON.stringify({ data, authtoken })
+      })
+      setChangeDetected(false);
+      const json = await response.json();
+      if (!json.success) {
+        toast.error(json.msg)
+        setProcessing(false)
+        return;
+      }
+      toast.success(json.msg);
+      setProcessing(false);
+      fetchUser(authtoken);
+      return;
+    }
+
+  }
+
+  const chooseAvatar = () => {
+    if (typeof window != undefined) {
+      let elem = document.querySelector('.image-input');
+      elem.click();
+    }
+  }
+  const imageProcessing = async (e) => {
+    e.preventDefault();
+    if (typeof window !== 'undefined') {
+      setChangeDetected(true);
+      const files = e.target.files;
+      setProcessing(true);
+      let data = new FormData();
+      data.append('file', files[0]);
+      data.append('upload_preset', 'myspaceitem');
+      let response = await fetch('https://api.cloudinary.com/v1_1/mohdusman1/image/upload', {
+        method: "POST",
+        body: data
+      })
+      let file = await response.json();
+      handleAvatarUpdate(file.url)
+    }
+  }
+  const handleAvatarUpdate = async (avatar) => {
+    if (typeof window != undefined) {
+      let authtoken = localStorage.getItem('authtoken');
+      const response = await fetch('/api/avatarchange', {
+        method: 'POST',
+        headers: {
+          'content-type': 'application/json'
+        },
+        body: JSON.stringify({ avatar, authtoken })
+      })
+      const json = await response.json();
+      setChangeDetected(false);
+      if (!json.success) {
+        toast.error(json.msg)
+        setProcessing(false)
+        return;
+      }
+      toast.success(json.msg);
+      setProcessing(false);
+      fetchUser(authtoken);
+      return;
+    }
+
+  }
   useEffect(() => {
     if (!login) {
       router.push('/auth/login');
@@ -36,15 +113,19 @@ const Profile = () => {
         const id = localStorage.getItem('duati-id');
         const foundUser = users.find((user) => user.id === id);
         if (foundUser) {
-          console.log(foundUser)
           setData(foundUser);
         }
       }
     }
   }, [login])
 
+useEffect(() => {
+  setData(userData)
+}, [userData])
+
   return (
     <>
+      <Toaster position='top-right' />
       <div className="container mx-auto p-4">
         <div className="flex items-center justify-between ">
           <h2 className="font-bold text-xl">Profile</h2>
@@ -58,7 +139,11 @@ const Profile = () => {
               changeDetected &&
               <div className="flex justify-end gap-4">
                 <button onClick={handleOnCancel} className="font-semibold text-sm border rounded-full aspect-square shrink-0 p-1 "><MdCancel /> </button>
-                <button className="font-semibold text-sm border rounded-full aspect-square shrink-0 p-1 bg-[#46a999] text-white"><MdCheck /> </button>
+                {
+                  processing ?
+                    <Spinner /> :
+                    <button onClick={handleUpdate} className="font-semibold text-sm border rounded-full aspect-square shrink-0 p-1 bg-[#46a999] text-white"><MdCheck /> </button>
+                }
               </div>
             }
             {
@@ -67,8 +152,9 @@ const Profile = () => {
                 <div className="w-full flex items-center px-4 mt-4">
                   <div className="flex md:justify-betwen md:flex-row flex-col justify-center w-full gap-3 items-center">
                     <div className="relative rounded-full">
-                      <Image src={data.avatar} alt="profile_picture" width={0} height={0} className="w-24 aspect-square border-2 border-white rounded-full object-cover" />
-                      <button className="p-1 aspect-square bg-white rounded-full text-sm shadow-md border backdrop-blur-md absolute bottom-1 right-1"><MdEdit /> </button>
+                      <Image src={data.avatar ? data.avatar : `https://ui-avatars.com/api/?name=${data.name}`} alt="profile_picture" width={96} height={96} className="w-24 aspect-square border-2 border-white rounded-full object-cover" />
+                      <button onClick={chooseAvatar} className="p-1 aspect-square bg-white rounded-full text-sm shadow-md border backdrop-blur-md absolute bottom-1 right-1"><MdEdit /> </button>
+                      <input onChange={imageProcessing} id="dropzone-file" type="file" className="hidden image-input" multiple accept='/image*' />
                     </div>
                     <div className="w-full flex md:gap-0 gap-4 md:flex-row flex-col justify-center items-center  md:justify-between">
                       <div>
@@ -127,7 +213,7 @@ const Profile = () => {
                   <div className="col-span-2 font-semibold text-gray-500">Duration</div>
                   <div className="col-span-3">
                     <div className="flex items-center justify-start">
-                      <select name="start" id="start" onChange={handleOnChange} value={data.start} className="p-1 border focus:outline-none rounded">
+                      <select name="from" id="from" onChange={handleOnChange} value={data.from} className="p-1 border focus:outline-none rounded">
                         <option value="2020">2020</option>
                         <option value="2021">2021</option>
                         <option value="2022">2022</option>
@@ -135,7 +221,7 @@ const Profile = () => {
                         <option value="2024">2024</option>
                       </select>
                       <span className="mx-2">to</span>
-                      <select name="end" id="end" value={data.to} onChange={handleOnChange} className="p-1 border focus:outline-none rounded">
+                      <select name="to" id="to" value={data.to} onChange={handleOnChange} className="p-1 border focus:outline-none rounded">
                         <option value="2020">2020</option>
                         <option value="2021">2021</option>
                         <option value="2022">2022</option>

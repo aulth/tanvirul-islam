@@ -39,7 +39,7 @@ const Sidebar = () => {
       }, []);
       const handleLogout = ()=>{
         if(typeof window!=undefined){
-          localStorage.removeItem('duati-id');
+          localStorage.removeItem('authtoken');
           setLogin(false);
           setUserData("");
         }

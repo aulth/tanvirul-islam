@@ -4,50 +4,57 @@ import users from '@/data/users';
 import Link from 'next/link';
 import { ContextData } from '@/context/context';
 import { useRouter } from 'next/router';
+import toast, { Toaster } from 'react-hot-toast';
+import Spinner from '../Spinner';
 const Login = () => {
     const [showPass, setShowPass] = useState(false);
-    const { setLogin, setUserData, login } = useContext(ContextData);
+    const { setLogin, setUserData, login, fetchUser } = useContext(ContextData);
     const [data, setData] = useState({});
+    const [processing, setProcessing] = useState(false)
     const router = useRouter();
     const handleOnChange = (e) => {
         e.preventDefault();
         setData({ ...data, [e.target.name]: e.target.value });
-        console.log(data)
     }
     const handleLogin = async (e) => {
         e.preventDefault();
-        const foundUser = users.find((user) => user.email === data.email);
-        if(!foundUser){
-            let elem = document.querySelector('.email-label');
-            elem.classList.add('text-red-500');
-            elem.innerText = "User does not exist";
+        if (!data.email) {
+            return toast.error("Enter the email");
         }
-        if (foundUser && foundUser.password == data.password) {
-            let elem = document.querySelector('.pass-label');
-            elem.classList.remove('text-red-500');
-            elem.innerText = "Password";
-            let emailLabel = document.querySelector('.email-label');
-            emailLabel.classList.remove('text-red-500');
-            emailLabel.innerText = "Email";
-            localStorage.setItem('duati-id', foundUser.id);
-            setUserData(foundUser);
-            setLogin(true);
-        } else {
-            let elem = document.querySelector('.pass-label');
-            elem.classList.add('text-red-500');
-            elem.innerText = "Incorrect Password";
-            setUserData("");
-            setLogin(false);
+        if (!data.password) {
+            return toast.error("Enter the password");
+        }
+        setProcessing(true)
+        const response = await fetch('/api/login', {
+            method: 'POST',
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify(data)
+        })
+        const json = await response.json();
+        if (!json.success) {
+            toast.error(json.msg)
+            setProcessing(false)
+            return;
+        }
+        if (typeof window !== 'undefined') {
+            localStorage.setItem('authtoken', json.authtoken);
+            toast.success(json.msg)
+            setProcessing(false)
+            fetchUser(json.authtoken)
+            return;
         }
     };
     useEffect(() => {
-      if(login){
-        router.push('/account');
-      }
+        if (login) {
+            router.push('/account');
+        }
     },)
-    
+
     return (
         <>
+            <Toaster position='top-right' />
             <section className="md:bg-gray-50 bg-white dark:bg-gray-900">
                 <div className="flex flex-col items-center justify-center md:px-6  md:py-8 px-3 py-4 mx-auto md:h-screen lg:py-0">
                     <div className="w-full bg-white rounded-lg md:shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
@@ -67,8 +74,11 @@ const Login = () => {
                                         {showPass ? <BsEyeSlash /> : <BsEye />}
                                     </button>
                                 </div>
-
-                                <button type="submit" className="w-full text-white  focus:outline-none   font-medium rounded-lg text-sm px-5 py-2.5 text-center bg-[#46a999]">Sign in</button>
+                                {
+                                    processing ?
+                                        <div className="w-full flex justify-center"><Spinner /></div> :
+                                        <button type="submit" className="w-full text-white  focus:outline-none   font-medium rounded-lg text-sm px-5 py-2.5 text-center bg-[#46a999]">Sign in</button>
+                                }
                                 <p className="text-sm font-light text-gray-500 dark:text-gray-400">
                                     Don&apos;t have an account yet? <Link href="/auth/register" className="font-medium text-primary-600 hover:underline dark:text-primary-500">Sign up</Link>
                                 </p>

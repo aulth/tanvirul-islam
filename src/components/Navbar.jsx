@@ -56,7 +56,7 @@ const Navbar = () => {
                         {
                             login &&
                             <Link href="/account" className="flex justify-center items-center md:mx-2 mr-0.5 relative overflow-hidden">
-                                <Image src={userData?.avatar} width={25} height={25} className='md:w-[40px] aspect-square w-[28px] rounded-full object-cover' alt='avatar' />
+                                <Image src={userData?.avatar?userData.avatar:`https://ui-avatars.com/api/?name=${userData.name}`} width={25} height={25} className='md:w-[40px] aspect-square w-[28px] rounded-full object-cover' alt='avatar' />
                             </Link>
                         }
                         <div className="flex justify-center items-center md:hidden">

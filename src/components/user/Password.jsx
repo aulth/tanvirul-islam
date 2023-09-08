@@ -6,9 +6,12 @@ import { MdCancel, MdCheck, MdPassword } from "react-icons/md";
 import Sidebar from "./Sidebar";
 import { ContextData } from "@/context/context";
 import { useRouter } from "next/router";
+import toast, { Toaster } from 'react-hot-toast';
+import Spinner from "../Spinner";
 const Password = () => {
-  const { toggleProfileMenu, login } = useContext(ContextData);
+  const { toggleProfileMenu, login, fetchUser } = useContext(ContextData);
   const [showPass, setShowPass] = useState(false);
+  const [processing, setProcessing] = useState(false)
   const [data, setData] = useState({});
   const [changeDetected, setChangeDetected] = useState(false);
 
@@ -18,14 +21,35 @@ const Password = () => {
     e.preventDefault();
     setData({ ...data, [e.target.name]: e.target.value });
   }
-  const handleLogin = async (e) => {
-    e.preventDefault();
-    console.log("login");
-  }
   const handleOnCancel = (e)=>{
     e.preventDefault();
     setData({oldPassword:"", newPassword:""});
     setChangeDetected(false)
+  }
+  const handleUpdate = async (e) => {
+    e.preventDefault();
+    setProcessing(true)
+    if (typeof window != undefined) {
+      let authtoken = localStorage.getItem('authtoken');
+      const response = await fetch('/api/passwordchange', {
+        method: 'POST',
+        headers: {
+          'content-type': 'application/json'
+        },
+        body: JSON.stringify({ data, authtoken })
+      })
+      const json = await response.json();
+      if (!json.success) {
+        toast.error(json.msg)
+        setProcessing(false)
+        return;
+      }
+      toast.success(json.msg);
+      setProcessing(false);
+      fetchUser(authtoken);
+      return;
+    }
+
   }
   useEffect(() => {
     if (!login) {
@@ -35,6 +59,7 @@ const Password = () => {
 
   return (
     <>
+      <Toaster position='top-right' />
       <div className="container mx-auto p-4">
         <div className="flex items-center justify-between ">
           <h2 className="font-bold text-xl">Change Password</h2>
@@ -48,7 +73,11 @@ const Password = () => {
               changeDetected &&
               <div className="flex justify-end gap-4">
                 <button onClick={handleOnCancel} className="font-semibold text-sm border rounded-full aspect-square shrink-0 p-1 "><MdCancel /> </button>
-                <button className="font-semibold text-sm border rounded-full aspect-square shrink-0 p-1 bg-[#46a999] text-white"><MdCheck /> </button>
+                {
+                  processing ?
+                    <Spinner /> :
+                    <button onClick={handleUpdate} className="font-semibold text-sm border rounded-full aspect-square shrink-0 p-1 bg-[#46a999] text-white"><MdCheck /> </button>
+                }
               </div>
             }
             <form className="w-full grid grid-cols-1 md:grid-cols-2 gap-2 mt-4">
