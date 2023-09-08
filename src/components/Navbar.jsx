@@ -6,8 +6,15 @@ import { BiSolidUser } from 'react-icons/bi'
 import Link from 'next/link'
 import { ContextData } from '@/context/context'
 const Navbar = () => {
-    const { login, userData } = useContext(ContextData);
+    const { login, userData, setLogin, setUserData } = useContext(ContextData);
     const [openedMenu, setOpenedMenu] = useState(false);
+    const handleLogout = ()=>{
+        if(typeof window!=undefined){
+          localStorage.removeItem('authtoken');
+          setLogin(false);
+          setUserData("");
+        }
+      }
     return (
         <>
             <div className="w-screen bg-transparent">
@@ -47,7 +54,7 @@ const Navbar = () => {
                             {
                                 login &&
                                 <li className='w-full text-black font-semibold  bg-[#46a999]   rounded md:hidden '>
-                                    <button className='w-full text-left hover:bg-[#E6F2EF] text-white   hover:text-black  py-1 px-2 rounded inline-block duration-75 relative'>
+                                    <button onClick={handleLogout} className='w-full text-left hover:bg-[#E6F2EF] text-white   hover:text-black  py-1 px-2 rounded inline-block duration-75 relative'>
                                         <span className='inline-flex items-center gap-2'><BiLogOut className='text-lg mt-1' /><span className='mt-1'>Sign out</span> </span>
                                     </button>
                                 </li>

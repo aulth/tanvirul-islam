@@ -238,25 +238,25 @@ useEffect(() => {
                     <div className="">
                       <div className="flex items-center border p-1 rounded">
                         <span className="border-r pr-1"><MdFacebook /></span>
-                        <input type="text" value={data.facebook} onChange={handleOnChange} className="border-none focus:outline-none pl-1 w-full" />
+                        <input type="text" value={data.facebook} name="facebook" onChange={handleOnChange} className="border-none focus:outline-none pl-1 w-full" />
                       </div>
                     </div>
                     <div>
                       <div className="flex items-center border p-1 rounded">
                         <span className="border-r pr-1"><AiOutlineTwitter /> </span>
-                        <input type="text" value={data.twitter} onChange={handleOnChange} className="border-none focus:outline-none pl-1 w-full" />
+                        <input type="text" value={data.twitter} name="twitter"  onChange={handleOnChange} className="border-none focus:outline-none pl-1 w-full" />
                       </div>
                     </div>
                     <div>
                       <div className="flex items-center border p-1 rounded">
                         <span className="border-r pr-1"><MdWhatsapp /> </span>
-                        <input type="text" value={data.whatsapp} onChange={handleOnChange} className="border-none focus:outline-none pl-1 w-full" />
+                        <input type="text" value={data.whatsapp} name="whatsapp"  onChange={handleOnChange} className="border-none focus:outline-none pl-1 w-full" />
                       </div>
                     </div>
                     <div>
                       <div className="flex items-center border p-1 rounded">
                         <span className="border-r pr-1"><BsInstagram /> </span>
-                        <input type="text" value={data.instagram} onChange={handleOnChange} className="border-none focus:outline-none pl-1 w-full" />
+                        <input type="text" value={data.instagram} name="instagram"  onChange={handleOnChange} className="border-none focus:outline-none pl-1 w-full" />
                       </div>
                     </div>
                   </div>
