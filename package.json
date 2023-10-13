@@ -12,6 +12,7 @@
     "autoprefixer": "10.4.14",
     "eslint": "8.45.0",
     "eslint-config-next": "13.4.10",
+    "imagekit": "^4.1.3",
     "imagekitio-react": "^3.0.0",
     "jsonwebtoken": "^9.0.2",
     "mongoose": "^7.5.0",
