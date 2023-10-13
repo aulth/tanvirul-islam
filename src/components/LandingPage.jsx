@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { BiMap } from 'react-icons/bi'
 import Image from 'next/image'
 import Link from 'next/link'
-import {FcDonate} from 'react-icons/fc'
+import { FcDonate } from 'react-icons/fc'
 const LandingPage = () => {
     const [images, setImages] = useState(['https://source.unsplash.com/random/?school', 'https://source.unsplash.com/random/?islamic', 'https://source.unsplash.com/random/?masjid', 'https://source.unsplash.com/random/?class', 'https://source.unsplash.com/random/?hostel'])
     const [activeIndex, setActiveIndex] = useState(0)
@@ -27,13 +27,13 @@ const LandingPage = () => {
                     <p className='mt-4 font-semibold text-gray-500 text-sm'>
                         Cultivate future scholars at our Islamic Academy. Nurturing young minds to become knowledgeable Aalims. Empower your child&apos;s journey today.
                     </p>
-                    <div className="w-full flex items-center gap-2">
-                    <Link href="/auth/register">
-                        <button className="px-4 py-2 rounded mt-8 bg-[#FFC265] font-bold text-gray-700 text-sm">Get started</button>
-                    </Link>
-                    <Link href="/auth/register">
-                        <button className="px-4 flex items-center gap-1 py-2 rounded mt-8 border border-[#FFC265] font-bold text-gray-700 text-sm">Donate <Image src="https://img.icons8.com/badges/48/donate.png" width={20} height={20} alt='donate'/></button>
-                    </Link>
+                    <div className="w-full flex items-center gap-2 mt-8">
+                        <Link href="/auth/register" className='px-4 py-2 rounded  bg-[#FFC265] font-bold text-gray-700 text-sm'>
+                           Get started
+                        </Link>
+                        <Link href="/auth/register" className='px-4 py-2 rounded border border-[#FFC265] font-bold text-gray-700 text-sm'>
+                           <span className='flex gap-1 justify-center items-center'>Donate <Image src="https://img.icons8.com/badges/48/donate.png" width={20} height={20} alt='donate' /></span>
+                        </Link>
                     </div>
                     <div className="w-full flex justify-start gap-4 mt-6">
                         {
