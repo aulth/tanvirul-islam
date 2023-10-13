@@ -10,7 +10,7 @@ const page = () => {
             <div className="border-b">
                 <Navbar />
             </div>
-            <div className="container grid grid-cols-1 md:grid-cols-2 mx-auto p-4">
+            <div className="container grid grid-cols-1 gap-2 md:grid-cols-2 mx-auto p-4">
                 <div>
                     <NoticeUpload />
                     <NoticeItem />

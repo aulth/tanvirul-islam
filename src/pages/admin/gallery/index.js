@@ -1,4 +1,5 @@
 import Navbar from "@/components/Navbar";
+import Gallery from "@/components/admin/images/Gallery";
 
 const page = () => {
     return (
@@ -6,13 +7,7 @@ const page = () => {
             <div className="border-b">
                 <Navbar />
             </div>
-            <div className="container grid grid-cols-1 md:grid-cols-2 mx-auto p-4">
-                <div>
-
-                </div>
-                <div>
-                </div>
-            </div>
+            <Gallery />
         </>
     )
 }

@@ -8,7 +8,6 @@ import uniqolor from 'uniqolor'
 const AlumniCard = ({data}) => {
     let color = uniqolor(data.name);
     color = color.color;
-    console.log(color)
     return (
         <div>
             <div className="rounded-xl border shadow p-2 relative">

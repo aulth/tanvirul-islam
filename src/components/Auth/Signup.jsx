@@ -16,7 +16,6 @@ const Signup = () => {
     const handleOnChange = (e) => {
         e.preventDefault();
         setData({ ...data, [e.target.name]: e.target.value });
-        console.log(data)
     }
     const handleSignup = async (e) => {
         e.preventDefault();

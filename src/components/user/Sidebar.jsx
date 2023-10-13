@@ -55,7 +55,7 @@ const Sidebar = () => {
             <ul className="w-full flex gap-2 flex-col items-start font-semibold text-sm">
               <Link href="/account" className={`hover:bg-gray-100 ${router.pathname=="/account"?'bg-gray-100':''} rounded px-2 py-1 w-full text-left`}>Profile</Link>
               <Link href="/account/password" className={`hover:bg-gray-100 ${router.pathname.includes("password")?'bg-gray-100':''} rounded px-2 py-1 w-full text-left`}>Password</Link>
-              <Link href="/account/gallery"  className={`hover:bg-gray-100 ${router.pathname.includes("gallery")?'bg-gray-100':''} rounded px-2 py-1 w-full text-left`}>Gallery</Link>
+              {/* <Link href="/account/gallery"  className={`hover:bg-gray-100 ${router.pathname.includes("gallery")?'bg-gray-100':''} rounded px-2 py-1 w-full text-left`}>Gallery</Link> */}
               <button onClick={handleLogout}  className={`hover:bg-gray-100  rounded px-2 py-1 w-full text-left`}>Logout</button>
             </ul>
           </div>

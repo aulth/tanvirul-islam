@@ -60,7 +60,6 @@ const Gallery = () => {
         const id = localStorage.getItem('duati-id');
         const foundUser = users.find((user) => user.id === id);
         if (foundUser) {
-          console.log(foundUser)
           const { photosGroupedByMonth, allImages } = groupPhotosByMonth(foundUser.images);
           setGroupedByMonth(photosGroupedByMonth);
           setAllPhoto(allImages);

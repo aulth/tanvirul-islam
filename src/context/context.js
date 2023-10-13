@@ -25,7 +25,6 @@ const Context = ({ children }) => {
       body: JSON.stringify({ authtoken })
     })
     const json = await response.json();
-    console.log(json);
     if (json.success) {
       setUserData(json.user);
       setLogin(true)
@@ -36,7 +35,6 @@ const Context = ({ children }) => {
   useEffect(() => {
     if (typeof window != undefined) {
       let authtoken = localStorage.getItem('authtoken');
-      console.log(authtoken);
       if (authtoken) {
         fetchUser(authtoken);
       } else {

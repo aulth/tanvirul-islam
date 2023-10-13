@@ -39,14 +39,14 @@ const LandingPage = () => {
                         {
                             images.map((image, index) => {
                                 return <button onClick={() => { setActiveIndex(index) }} key={index} className="rounded-full aspect-square w-16 shrink shadow-md border relative overflow-hidden">
-                                    <Image src={images[index]} alt='masjid' layout='fill' objectFit='cover' className='rounded-full hover:scale-105 duration-75' />
+                                    <Image src={images[index]} alt='masjid' sizes='100%' fill  style={{objectFit:"cover"}}  className='rounded-full hover:scale-105 duration-75' />
                                 </button>
                             })
                         }
                     </div>
                 </div>
                 <div id='section-2' className="p-8  h-full flex justify-center items-center  relative">
-                    <Image src={images[activeIndex]} alt='carousel images' layout='fill' objectFit='cover' className='bg-blend-screen' />
+                    <Image src={images[activeIndex]} alt='carousel images' sizes='100%' fill  style={{objectFit:"cover"}}  className='bg-blend-screen' />
                 </div>
             </div>
         </>

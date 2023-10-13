@@ -23,11 +23,9 @@ const ForgotPassword = () => {
     const handleOnChange = (e) => {
         e.preventDefault();
         setData({ ...data, [e.target.name]: e.target.value });
-        console.log(data)
     }
     const handleLogin = async (e) => {
         e.preventDefault();
-        console.log("login");
     }
     const handleOnSendOtp = async (e) => {
         e.preventDefault();
@@ -38,7 +36,6 @@ const ForgotPassword = () => {
         if (otp) {
             setOtpLabel("green", "New otp sent to your email")
         }
-        console.log(newOtp);
         setOtp(newOtp);
         //send otp;
     }
