@@ -18,6 +18,7 @@ const Profile = () => {
   const [changeDetected, setChangeDetected] = useState(false);
   const [processing, setProcessing] = useState(false)
   const router = useRouter();
+  const yearsArray = Array.from({ length: 2031 - 1950 }, (_, index) => 1950 + index);
   const handleOnChange = (e) => {
     if (!changeDetected) {
       setDataCopy(data);
@@ -214,19 +215,15 @@ useEffect(() => {
                   <div className="col-span-3">
                     <div className="flex items-center justify-start">
                       <select name="from" id="from" onChange={handleOnChange} value={data.from} className="p-1 border focus:outline-none rounded">
-                        <option value="2020">2020</option>
-                        <option value="2021">2021</option>
-                        <option value="2022">2022</option>
-                        <option value="2023">2023</option>
-                        <option value="2024">2024</option>
+                        {yearsArray && yearsArray.map((year, index)=>{
+                          return <option key={index} value={year}>{year}</option>
+                        })}
                       </select>
                       <span className="mx-2">to</span>
                       <select name="to" id="to" value={data.to} onChange={handleOnChange} className="p-1 border focus:outline-none rounded">
-                        <option value="2020">2020</option>
-                        <option value="2021">2021</option>
-                        <option value="2022">2022</option>
-                        <option value="2023">2023</option>
-                        <option value="2024">2024</option>
+                      {yearsArray && yearsArray.map((year, index)=>{
+                          return <option key={index} value={year}>{year}</option>
+                        })}
                       </select>
                     </div>
                   </div>

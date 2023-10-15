@@ -24,28 +24,30 @@ const User = () => {
 
     return (
         <>
-            <table className="w-full border mt-4">
-                <thead>
-                    <tr className="bg-gray-100">
-                        <th className="p-2 font-semibold text-left">Name</th>
-                        <th className="p-2 font-semibold text-left">Email</th>
-                        <th className="p-2 font-semibold text-left">Password</th>
-                    </tr>
-                </thead>
-                <tbody className='text-sm'>
-                    {data && data.map((data, index) => (
-                        <tr key={index} className="border-b">
-                            <td className="p-2 border-r">{data.name}</td>
-                            <td className="p-2 border-r">{data.email}</td>
-                            <td className="p-2">{data.password}</td>
+            <div className="w-full overflow-x-auto">
+                <table className="w-full border mt-4">
+                    <thead>
+                        <tr className="bg-gray-100">
+                            <th className="p-2 font-semibold text-left">Name</th>
+                            <th className="p-2 font-semibold text-left">Email</th>
+                            <th className="p-2 font-semibold text-left">Password</th>
                         </tr>
-                    ))}
-                    {
-                        !data &&
-                        <Skelton/>
-                    }
-                </tbody>
-            </table>
+                    </thead>
+                    <tbody className='text-sm'>
+                        {data && data.map((data, index) => (
+                            <tr key={index} className="border-b">
+                                <td className="p-2 border-r">{data.name}</td>
+                                <td className="p-2 border-r">{data.email}</td>
+                                <td className="p-2">{data.password}</td>
+                            </tr>
+                        ))}
+                        {
+                            !data &&
+                            <Skelton/>
+                        }
+                    </tbody>
+                </table>
+            </div>
         </>
     )
 }
