@@ -24,3 +24,7 @@ html {
 .menu-link:hover .line {
   width: 100%;
 }
+@font-face{
+  font-family:'urdu';
+  src:url('/fonts/urdu.ttf')
+}

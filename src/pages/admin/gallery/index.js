@@ -1,14 +1,14 @@
 import Navbar from "@/components/Navbar";
+import Login from "@/components/admin/Login";
 import Gallery from "@/components/admin/images/Gallery";
-
-const page = () => {
+const Page = () => {
     return (
         <>
             <div className="border-b">
                 <Navbar />
             </div>
-            <Gallery />
+            <Gallery Login={Login}/>
         </>
     )
 }
-export default page;
+export default Page;

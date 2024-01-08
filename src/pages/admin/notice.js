@@ -1,7 +1,6 @@
 import Navbar from "@/components/Navbar";
 import NoticeBoard from "@/components/admin/notices/NoticeBoard";
-import NoticeItem from "@/components/admin/notices/NoticeItem";
-import NoticeUpload from "@/components/admin/notices/NoticeUpload";
+import Release from "@/components/admin/notices/Release/Release";
 
 
 const page = () => {
@@ -12,11 +11,7 @@ const page = () => {
             </div>
             <div className="container grid grid-cols-1 gap-2 md:grid-cols-2 mx-auto p-4">
                 <div>
-                    <NoticeUpload />
-                    <NoticeItem />
-                    <NoticeItem />
-                    <NoticeItem />
-                    <NoticeItem />
+                   <Release/>
                 </div>
                 <div>
                     <NoticeBoard/>

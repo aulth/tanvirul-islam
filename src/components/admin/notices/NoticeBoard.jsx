@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { BiSave } from 'react-icons/bi'
 import dynamic from 'next/dynamic';
 import { BsPencil } from 'react-icons/bs'
@@ -146,6 +146,23 @@ const NoticeBoard = () => {
         }
         setProcessing(false)
     }
+    const fetchNotice = async () => {
+        const res = await fetch("/api/admin/notice/get", {
+            method: "POST",
+            headers: {
+                'content-type': 'application/json',
+            },
+            body: JSON.stringify({ adminPin: process.env.NEXT_PUBLIC_ADMIN_PIN })
+        })
+        const json = await res.json()
+        if (json.success) {
+            setData(json.notice[0].description)
+        }
+    }
+    useEffect(() => {
+        fetchNotice();
+    }, [])
+
     return (
         <>
             <Toaster position='top-right' />
@@ -160,7 +177,7 @@ const NoticeBoard = () => {
                             <Spinner />
                     }
                 </div>
-                <QuillNoSSRWrapper modules={modules} onChange={handleOnContentChange} className='h-64 ' theme="snow" />
+                <QuillNoSSRWrapper value={data} modules={modules} onChange={handleOnContentChange} className='h-64 ' theme="snow" />
             </div>
         </>
     )
